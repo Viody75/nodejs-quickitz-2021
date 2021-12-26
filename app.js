@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+const cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -18,7 +19,14 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Function to serve all static files
+// inside public directory.
+app.use(express.static('public'));
+app.use('/images', express.static('images'));
+// http://localhost:7755/images/ee56a1fd60a2ce90a5c40fd274192963.png
+
 app.use(logger('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -33,6 +41,8 @@ app.use(session({
 }))
 
 app.use(flash());
+
+
 
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);

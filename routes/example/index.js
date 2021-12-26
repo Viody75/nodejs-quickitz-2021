@@ -6,4 +6,8 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Viody - Node.js CodeLab' });
 });
 
+router.get('/test', function (req, res, next) {
+  res.render('test');
+});
+
 module.exports = router;
